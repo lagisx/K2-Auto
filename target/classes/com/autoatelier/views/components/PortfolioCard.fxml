@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:id="portfolioCard"
+      styleClass="portfolio-card-new"
+      spacing="0"
+      prefWidth="280">
+
+    
+    <StackPane styleClass="portfolio-card-image-wrap" prefHeight="180">
+        <ImageView fx:id="cardThumb" fitWidth="280" fitHeight="180"
+                   preserveRatio="false" styleClass="portfolio-card-img"/>
+        <VBox fx:id="thumbPlaceholder" alignment="CENTER"
+              styleClass="portfolio-card-placeholder" visible="false" managed="false">
+            <Label text="📷" styleClass="placeholder-icon"/>
+            <Label text="Нет фото" styleClass="placeholder-text"/>
+        </VBox>
+        
+        <Label fx:id="cardPhotoCount" styleClass="portfolio-photo-count"
+               StackPane.alignment="BOTTOM_RIGHT"/>
+    </StackPane>
+
+    <VBox spacing="8" styleClass="portfolio-card-content">
+        <Label fx:id="cardTitle" styleClass="portfolio-card-title" wrapText="true"/>
+
+        <HBox spacing="6" alignment="CENTER_LEFT">
+            <Label text="🚗" styleClass="card-meta-icon"/>
+            <Label fx:id="cardCar" styleClass="portfolio-card-car"/>
+        </HBox>
+
+        <Label fx:id="cardServiceBadge" styleClass="portfolio-service-badge"/>
+
+        <Label fx:id="cardDesc" styleClass="portfolio-card-desc"
+               wrapText="true" maxHeight="40"/>
+    </VBox>
+</VBox>

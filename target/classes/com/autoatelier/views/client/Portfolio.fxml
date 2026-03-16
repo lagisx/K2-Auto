@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.client.ClientPortfolioController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header" alignment="CENTER_LEFT">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Главная"      styleClass="nav-tab"                onAction="#goToDashboard"/>
+        <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка" styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="Портфолио"    styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+    </HBox>
+
+    <VBox styleClass="page-content" spacing="20" VBox.vgrow="ALWAYS">
+        <VBox spacing="4">
+            <Label text="Портфолио работ" styleClass="page-title"/>
+            <Label text="Реализованные проекты нашего ателье" styleClass="page-subtitle"/>
+        </VBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="searchField" promptText="🔍  Поиск по названию или автомобилю..."
+                       styleClass="search-field" prefWidth="340"/>
+        </HBox>
+
+        <Label fx:id="statusLabel" styleClass="page-subtitle"/>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+            <FlowPane fx:id="portfolioPane" hgap="18" vgap="18" styleClass="cards-pane"/>
+        </ScrollPane>
+    </VBox>
+</VBox>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.manager.ManagerPortfolioController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header topbar-manager" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Менеджер" styleClass="topbar-role-badge topbar-role-manager"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Обзор"     styleClass="nav-tab"                onAction="#goToDashboard"/>
+        <Button text="Заказы"    styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="Портфолио" styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
+
+        
+        <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <VBox spacing="4">
+                <Label text="Опубликованные работы" styleClass="page-title"/>
+                <Label fx:id="portfolioStatus" styleClass="page-subtitle"/>
+            </VBox>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+                <FlowPane fx:id="portfolioPane" hgap="14" vgap="14" styleClass="cards-pane"/>
+            </ScrollPane>
+        </VBox>
+
+        
+        <VBox spacing="16" styleClass="detail-panel-new" minWidth="340" maxWidth="380">
+            <Label text="Добавить работу" styleClass="detail-panel-title"/>
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="8">
+                <Label text="НАЗВАНИЕ" styleClass="form-label-new"/>
+                <TextField fx:id="titleField" promptText="Например: BMW M5 — карбоновый пакет"
+                           styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="АВТОМОБИЛЬ" styleClass="form-label-new"/>
+                <TextField fx:id="carModelField" promptText="Марка и модель" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="КАТЕГОРИЯ РАБОТ" styleClass="form-label-new"/>
+                <ComboBox fx:id="serviceCombo" maxWidth="Infinity" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ОПИСАНИЕ" styleClass="form-label-new"/>
+                <TextArea fx:id="descriptionArea" prefRowCount="3" styleClass="input-textarea"
+                          promptText="Расскажите о проделанной работе..."/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ФОТОГРАФИИ" styleClass="form-label-new"/>
+                <Button text="📷  Выбрать фото..." styleClass="btn-outline"
+                        onAction="#handleAddPhotos" maxWidth="Infinity"/>
+                <Label fx:id="photoCountLabel" text="Фото не выбраны" styleClass="page-subtitle"/>
+                <ScrollPane prefHeight="90" fitToWidth="true">
+                    <FlowPane fx:id="photosPreview" hgap="6" vgap="6"/>
+                </ScrollPane>
+            </VBox>
+            <Label fx:id="formStatus" styleClass="page-subtitle" wrapText="true"/>
+            <Button fx:id="publishButton" text="Опубликовать работу"
+                    styleClass="btn-primary-lg" onAction="#handlePublish" maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

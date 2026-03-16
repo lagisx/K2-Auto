@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="800" prefWidth="1200" styleClass="auth-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.autoatelier.controller.LoginController">
+
+    <HBox alignment="CENTER" maxHeight="560" maxWidth="900" styleClass="auth-container">
+
+        
+        <VBox alignment="CENTER" minWidth="380" spacing="20" styleClass="auth-brand">
+            <Label styleClass="auth-brand-icon" text="🚗" />
+            <Label styleClass="auth-brand-title" text="Ателье Автомобилей" />
+            <Label styleClass="auth-brand-sub" text="Профессиональный тюнинг и кастомизация" />
+        </VBox>
+
+        
+        <VBox alignment="CENTER" minWidth="380" spacing="20" styleClass="auth-form">
+            <Label styleClass="auth-form-title" text="Вход в систему" />
+            <Label styleClass="auth-form-sub" text="Введите данные вашего аккаунта" />
+
+            <VBox maxWidth="320" spacing="6">
+                <Label styleClass="form-label-new" text="Email" />
+                <TextField fx:id="emailField" promptText="your@email.com" styleClass="input-field" />
+            </VBox>
+            <VBox maxWidth="320" spacing="6">
+                <Label styleClass="form-label-new" text="Пароль" />
+                <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="input-field" />
+            </VBox>
+
+            <Label fx:id="errorLabel" maxWidth="320" styleClass="form-error" visible="false" wrapText="true" />
+
+            <Button fx:id="loginButton" onAction="#handleLogin" prefWidth="320" styleClass="btn-primary-lg" text="Войти" />
+
+            <VBox fx:id="loadingOverlay" alignment="CENTER" spacing="8" visible="false">
+                <ProgressIndicator styleClass="loader" />
+                <Label styleClass="page-subtitle" text="Выполняется вход..." />
+            </VBox>
+
+            <Separator maxWidth="320" styleClass="auth-sep" />
+
+            <HBox alignment="CENTER" spacing="8">
+                <Label styleClass="page-subtitle" text="Нет аккаунта?" />
+                <Button onAction="#handleRegister" styleClass="link-btn" text="Зарегистрироваться" />
+            </HBox>
+        </VBox>
+    </HBox>
+</StackPane>
