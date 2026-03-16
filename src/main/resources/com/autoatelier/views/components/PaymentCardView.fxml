@@ -6,7 +6,6 @@
       styleClass="payment-card-visual"
       maxWidth="340" minWidth="280" spacing="0">
 
-    
     <HBox alignment="CENTER_LEFT" spacing="0">
         <Label fx:id="chipLabel" text="💳" styleClass="payment-card-chip"/>
         <Region HBox.hgrow="ALWAYS"/>
@@ -14,12 +13,10 @@
         <Button fx:id="deleteBtn" text="✕" styleClass="btn-delete-card"/>
     </HBox>
 
-    
     <Label fx:id="numberLabel" text="**** **** **** 0000"
            styleClass="payment-card-number-visual"
            style="-fx-padding: 12 0 8 0;"/>
 
-    
     <HBox alignment="BOTTOM_LEFT" spacing="0">
         <VBox spacing="3" HBox.hgrow="ALWAYS">
             <Label text="ДЕРЖАТЕЛЬ" styleClass="payment-card-label-small"/>

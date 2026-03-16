@@ -15,10 +15,10 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"      styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
         <Button text="Новая заявка" styleClass="nav-tab"                onAction="#goToNewOrder"/>
         <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат" styleClass="nav-tab"                onAction="#goToPayHistory"/>
         <Button text="Профиль"      styleClass="nav-tab nav-tab-active" onAction="#goToProfile"/>
     </HBox>
 
@@ -30,7 +30,6 @@
                 <Label fx:id="emailLabel" styleClass="profile-email"/>
             </VBox>
 
-            
             <VBox styleClass="profile-section" spacing="16">
                 <Label text="Личные данные" styleClass="profile-section-title"/>
                 <Separator styleClass="detail-sep"/>
@@ -52,7 +51,6 @@
                 </HBox>
             </VBox>
 
-            
             <VBox styleClass="profile-section" spacing="16">
                 <Label text="Безопасность" styleClass="profile-section-title"/>
                 <Separator styleClass="detail-sep"/>
@@ -74,12 +72,10 @@
                 </HBox>
             </VBox>
 
-            
             <VBox styleClass="profile-section" spacing="16">
                 <Label text="Карты оплаты" styleClass="profile-section-title"/>
                 <Separator styleClass="detail-sep"/>
 
-                
                 <VBox fx:id="cardsListBox" spacing="10"/>
 
                 <Separator styleClass="detail-sep"/>
@@ -122,7 +118,6 @@
                 </VBox>
             </VBox>
 
-            
             <VBox styleClass="profile-section profile-danger-section" spacing="14">
                 <Label text="Опасная зона" styleClass="profile-section-title profile-danger-title"/>
                 <Separator styleClass="detail-sep"/>

@@ -15,11 +15,11 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"      styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
-        <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
-        <Button text="Новая заявка" styleClass="nav-tab"                onAction="#goToNewOrder"/>
-        <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>
-        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+        <Button text="Каталог"        styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка"   styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"     styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат"  styleClass="nav-tab"                onAction="#goToPayHistory"/>
+        <Button text="Профиль"        styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
@@ -30,7 +30,6 @@
                 <Label text="Добро пожаловать в ателье. Выберите услугу и оформите заявку." styleClass="page-subtitle"/>
             </VBox>
 
-            
             <HBox spacing="16">
                 <VBox styleClass="stat-card-new stat-accent-blue" HBox.hgrow="ALWAYS" spacing="8">
                     <Label text="📋  Всего заявок" styleClass="stat-card-label"/>
@@ -44,9 +43,19 @@
                     <Label text="✅  Завершено" styleClass="stat-card-label"/>
                     <Label fx:id="completedOrdersLabel" text="—" styleClass="stat-card-value"/>
                 </VBox>
+                <VBox styleClass="stat-card-new stat-accent-red" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="💰  Потрачено" styleClass="stat-card-label"/>
+                    <Label fx:id="spentLabel" text="—" styleClass="stat-card-value"
+                           style="-fx-font-size: 22px;"/>
+                </VBox>
             </HBox>
 
-            
+            <HBox spacing="12">
+                <Button text="🔍  Каталог услуг"   styleClass="action-btn action-btn-primary" onAction="#goToCatalog"/>
+                <Button text="📋  Мои заявки"       styleClass="action-btn action-btn-ghost"   onAction="#goToOrders"/>
+                <Button text="💳  История оплат"    styleClass="action-btn action-btn-ghost"   onAction="#goToPayHistory"/>
+            </HBox>
+
             <VBox spacing="12">
                 <HBox alignment="CENTER_LEFT">
                     <Label text="Последние заявки" styleClass="section-title" HBox.hgrow="ALWAYS"/>

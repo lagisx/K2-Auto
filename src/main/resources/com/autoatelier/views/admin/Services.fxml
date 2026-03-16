@@ -16,16 +16,15 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"        styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
-        <Button text="Услуги"       styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+        <Button text="Услуги"       styleClass="nav-tab nav-tab-active" onAction="#goToServices"/>
         <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
         <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
     <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
 
-        
         <VBox spacing="14" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <VBox spacing="4" HBox.hgrow="ALWAYS">
@@ -45,7 +44,6 @@
             </TableView>
         </VBox>
 
-        
         <VBox spacing="14" styleClass="detail-panel-new" minWidth="320" maxWidth="360">
             <Label text="Редактировать услугу" styleClass="detail-panel-title"/>
             <Separator styleClass="detail-sep"/>

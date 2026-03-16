@@ -15,7 +15,6 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"      styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
         <Button text="Новая заявка" styleClass="nav-tab"                onAction="#goToNewOrder"/>
         <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>

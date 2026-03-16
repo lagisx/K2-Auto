@@ -8,6 +8,8 @@ import com.autoatelier.util.SceneManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.scene.control.Label;
 
 import java.util.List;
@@ -23,6 +25,9 @@ public class AdminStatisticsController extends BaseController {
 
     @FXML private PieChart statusPieChart;
     @FXML private BarChart<String, Number> revenueBarChart;
+    @FXML private LineChart<String, Number> ordersLineChart;
+    @FXML private CategoryAxis lineXAxis;
+    @FXML private NumberAxis   lineYAxis;
     @FXML private CategoryAxis barXAxis;
     @FXML private NumberAxis barYAxis;
 
@@ -64,6 +69,7 @@ public class AdminStatisticsController extends BaseController {
 
                     buildPieChart(statusStats);
                     buildBarChart(revenueByService);
+                    buildLineChart(orders);
                 });
             } catch (Exception e) {
             }
@@ -107,6 +113,40 @@ public class AdminStatisticsController extends BaseController {
 
     @FXML private void goToDashboard() { SceneManager.navigate("admin-dashboard"); }
     @FXML private void goToProfile()   { SceneManager.navigate("admin-profile"); }
-    @FXML private void goToUsers() { SceneManager.navigate("admin-users"); }
-    @FXML private void goToServices() { SceneManager.navigate("admin-services"); }
+    @FXML private void goToUsers()     { SceneManager.navigate("admin-users"); }
+    @FXML private void goToServices()  { SceneManager.navigate("admin-services"); }
+    @FXML private void goToStats()     {  }
+    @FXML private void goToArchive()   { SceneManager.navigate("admin-archive"); }
+
+    private void buildLineChart(java.util.List<Order> orders) {
+        if (ordersLineChart == null) return;
+        ordersLineChart.getData().clear();
+        lineXAxis.setLabel("Дата");
+        lineYAxis.setLabel("Заявок");
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd.MM");
+        LocalDate today = LocalDate.now();
+
+        java.util.Map<String, Long> byDay = new java.util.LinkedHashMap<>();
+        for (int i = 13; i >= 0; i--) {
+            byDay.put(today.minusDays(i).format(fmt), 0L);
+        }
+
+        for (Order o : orders) {
+            if (o.getCreatedAt() == null) continue;
+            try {
+                LocalDate d = LocalDate.parse(o.getCreatedAt().substring(0, 10));
+                if (!d.isBefore(today.minusDays(13))) {
+                    String key = d.format(fmt);
+                    byDay.merge(key, 1L, Long::sum);
+                }
+            } catch (Exception ignored) {}
+        }
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Заявки за 14 дней");
+        byDay.forEach((day, cnt) -> series.getData().add(new XYChart.Data<>(day, cnt)));
+        ordersLineChart.getData().add(series);
+    }
+
 }

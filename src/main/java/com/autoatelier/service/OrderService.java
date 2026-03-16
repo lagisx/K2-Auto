@@ -88,7 +88,11 @@ public class OrderService {
             body.put("manager_comment", comment);
         }
 
-        HttpUtil.patch("/orders", "id=eq." + orderId, HttpUtil.toJson(body), token);
+        java.net.http.HttpResponse<String> res =
+                HttpUtil.patch("/orders", "id=eq." + orderId, HttpUtil.toJson(body), token);
+        if (!HttpUtil.isSuccess(res.statusCode())) {
+            throw new Exception("Не удалось обновить статус (HTTP " + res.statusCode() + "): " + res.body());
+        }
     }
 
     public void updatePrice(Long orderId, Double price) throws Exception {
@@ -117,4 +121,19 @@ public class OrderService {
         }
         return stats;
     }
+    public void cancelOrder(Long orderId) throws Exception {
+        String token = SessionManager.getInstance().getAccessToken();
+        String clientId = SessionManager.getInstance().getCurrentUser().getId();
+        Map<String, Object> body = new HashMap<>();
+        body.put("status", Order.Status.CANCELLED.key);
+
+        java.net.http.HttpResponse<String> res =
+                HttpUtil.patch("/orders",
+                        "id=eq." + orderId + "&client_id=eq." + clientId,
+                        HttpUtil.toJson(body), token);
+        if (!HttpUtil.isSuccess(res.statusCode())) {
+            throw new Exception("Не удалось отменить заявку (HTTP " + res.statusCode() + "): " + res.body());
+        }
+    }
+
 }

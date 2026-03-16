@@ -17,10 +17,11 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"        styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
         <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
-        <Button text="Статистика"   styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+        <Button text="Статистика"   styleClass="nav-tab nav-tab-active" onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
+        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
@@ -50,12 +51,21 @@
                 </VBox>
             </HBox>
 
+            <VBox styleClass="chart-card-new">
+                <Label text="📈  Заявки за последние 14 дней" styleClass="page-subtitle"
+                       style="-fx-font-weight:bold; -fx-padding: 0 0 8 0;"/>
+                <LineChart fx:id="ordersLineChart" prefHeight="260" animated="true" createSymbols="true">
+                    <xAxis><CategoryAxis fx:id="lineXAxis"/></xAxis>
+                    <yAxis><NumberAxis fx:id="lineYAxis" minorTickVisible="false"/></yAxis>
+                </LineChart>
+            </VBox>
+
             <HBox spacing="16">
                 <VBox styleClass="chart-card-new" HBox.hgrow="ALWAYS">
-                    <PieChart fx:id="statusPieChart" prefHeight="320" animated="true"/>
+                    <PieChart fx:id="statusPieChart" prefHeight="300" animated="true"/>
                 </VBox>
                 <VBox styleClass="chart-card-new" HBox.hgrow="ALWAYS">
-                    <BarChart fx:id="revenueBarChart" prefHeight="320" animated="true">
+                    <BarChart fx:id="revenueBarChart" prefHeight="300" animated="true">
                         <xAxis><CategoryAxis fx:id="barXAxis"/></xAxis>
                         <yAxis><NumberAxis fx:id="barYAxis"/></yAxis>
                     </BarChart>

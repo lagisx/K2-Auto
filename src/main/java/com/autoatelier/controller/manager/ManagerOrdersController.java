@@ -4,14 +4,12 @@ import com.autoatelier.controller.BaseController;
 import com.autoatelier.model.Order;
 import com.autoatelier.service.OrderService;
 import com.autoatelier.util.AlertUtil;
+import com.autoatelier.util.OrderCardLoader;
 import com.autoatelier.util.SceneManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
@@ -31,7 +29,9 @@ public class ManagerOrdersController extends BaseController {
     @FXML private Label statusLabel;
     @FXML private ComboBox<String> filterCombo;
 
+    @FXML private TextField clientSearchField;
     private Order selectedOrder;
+    private List<Order> currentOrders = new java.util.ArrayList<>();
 
     @Override
     protected void onInit() {
@@ -72,6 +72,7 @@ public class ManagerOrdersController extends BaseController {
                         ? OrderService.getInstance().getAllOrders()
                         : OrderService.getInstance().getOrdersByStatus(statusKey);
                 Platform.runLater(() -> {
+                    currentOrders = orders;
                     ordersListBox.getChildren().clear();
                     statusLabel.setText("Заказов: " + orders.size());
                     if (orders.isEmpty()) {
@@ -89,53 +90,7 @@ public class ManagerOrdersController extends BaseController {
     }
 
     private VBox buildOrderCard(Order order) {
-        VBox card = new VBox(0);
-        card.getStyleClass().add("order-card");
-        card.setCursor(Cursor.HAND);
-        card.setOnMouseClicked(e -> showDetail(order));
-
-        Order.Status st = order.getStatusEnum();
-
-        HBox row = new HBox(0);
-        row.setAlignment(Pos.CENTER_LEFT);
-
-        Rectangle bar = new Rectangle(4, 80);
-        bar.setStyle("-fx-fill: " + st.color + ";");
-        bar.setArcWidth(4); bar.setArcHeight(4);
-
-        VBox body = new VBox(8);
-        body.getStyleClass().add("order-card-body");
-        HBox.setHgrow(body, Priority.ALWAYS);
-
-        HBox top = new HBox(10);
-        top.setAlignment(Pos.CENTER_LEFT);
-        String svcText = order.getService() != null ? order.getService().getName() : "Услуга #" + order.getServiceId();
-        Label svc = new Label(svcText);
-        svc.getStyleClass().add("order-card-service");
-        HBox.setHgrow(svc, Priority.ALWAYS);
-        svc.setWrapText(true);
-        Label badge = new Label(st.display);
-        badge.getStyleClass().addAll("order-card-status-badge", "badge-" + order.getStatus());
-        top.getChildren().addAll(svc, badge);
-
-        String clientName = order.getClient() != null ? order.getClient().getFullName() : "Клиент";
-        Label clientLbl = new Label("👤  " + clientName + "  ·  🚗  " + order.getCarInfo());
-        clientLbl.getStyleClass().add("order-card-meta");
-
-        HBox bot = new HBox(0);
-        bot.setAlignment(Pos.CENTER_LEFT);
-        Label price = new Label(order.getPriceFormatted());
-        price.getStyleClass().add("order-card-price");
-        HBox.setHgrow(price, Priority.ALWAYS);
-        String dateStr = order.getCreatedAt() != null ? order.getCreatedAt().substring(0, 10) : "";
-        Label date = new Label(dateStr);
-        date.getStyleClass().add("order-card-date");
-        bot.getChildren().addAll(price, date);
-
-        body.getChildren().addAll(top, clientLbl, bot);
-        row.getChildren().addAll(bar, body);
-        card.getChildren().add(row);
-        return card;
+        return OrderCardLoader.create(order, () -> showDetail(order));
     }
 
     private void showDetail(Order order) {
@@ -190,6 +145,39 @@ public class ManagerOrdersController extends BaseController {
     }
     @FXML private void refresh() { loadOrders(null); filterCombo.setValue("Все"); }
     @FXML private void goToDashboard()  { SceneManager.navigate("manager-dashboard"); }
+    @FXML private void goToOrders()     {  }
     @FXML private void goToProfile()    { SceneManager.navigate("manager-profile"); }
     @FXML private void goToCatalog()     { SceneManager.navigate("manager-catalog"); }
+
+    @FXML
+    private void handleClientSearch() {
+        String q = clientSearchField.getText().trim().toLowerCase();
+        if (q.isBlank()) { handleSearchReset(); return; }
+        List<Order> filtered = currentOrders.stream()
+                .filter(o -> {
+                    if (o.getClient() == null) return false;
+                    String name  = o.getClient().getFullName() != null ? o.getClient().getFullName().toLowerCase() : "";
+                    String phone = o.getClient().getPhone()    != null ? o.getClient().getPhone().toLowerCase()    : "";
+                    return name.contains(q) || phone.contains(q);
+                })
+                .collect(java.util.stream.Collectors.toList());
+        ordersListBox.getChildren().clear();
+        statusLabel.setText("Найдено: " + filtered.size());
+        if (filtered.isEmpty()) {
+            javafx.scene.control.Label empty = new javafx.scene.control.Label("Клиент не найден");
+            empty.getStyleClass().add("page-subtitle");
+            ordersListBox.getChildren().add(empty);
+        } else {
+            filtered.forEach(o -> ordersListBox.getChildren().add(buildOrderCard(o)));
+        }
+    }
+
+    @FXML
+    private void handleSearchReset() {
+        clientSearchField.clear();
+        ordersListBox.getChildren().clear();
+        statusLabel.setText("Заказов: " + currentOrders.size());
+        currentOrders.forEach(o -> ordersListBox.getChildren().add(buildOrderCard(o)));
+    }
+
 }

@@ -9,14 +9,13 @@
       spacing="0"
       prefWidth="260">
 
-    
     <StackPane styleClass="service-card-image-wrap" prefHeight="140">
         <ImageView fx:id="cardImage" fitWidth="260" fitHeight="140"
                    preserveRatio="false" styleClass="service-card-img"/>
         <VBox fx:id="cardImagePlaceholder" alignment="CENTER" styleClass="service-card-placeholder" visible="false" managed="false">
             <Label text="🔧" styleClass="placeholder-icon"/>
         </VBox>
-        
+
         <Label fx:id="cardCategory" styleClass="service-card-category-badge"
                StackPane.alignment="TOP_LEFT"/>
     </StackPane>

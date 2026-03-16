@@ -16,14 +16,12 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"     styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Заказы"    styleClass="nav-tab"                onAction="#goToOrders"/>
         <Button text="Портфолио" styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
     </HBox>
 
     <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
 
-        
         <VBox spacing="14" HBox.hgrow="ALWAYS">
             <VBox spacing="4">
                 <Label text="Опубликованные работы" styleClass="page-title"/>
@@ -34,7 +32,6 @@
             </ScrollPane>
         </VBox>
 
-        
         <VBox spacing="16" styleClass="detail-panel-new" minWidth="340" maxWidth="380">
             <Label text="Добавить работу" styleClass="detail-panel-title"/>
             <Separator styleClass="detail-sep"/>

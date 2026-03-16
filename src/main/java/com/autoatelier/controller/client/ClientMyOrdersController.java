@@ -3,26 +3,31 @@ package com.autoatelier.controller.client;
 import com.autoatelier.controller.BaseController;
 import com.autoatelier.model.Order;
 import com.autoatelier.service.OrderService;
+import com.autoatelier.util.AlertUtil;
+import com.autoatelier.util.OrderCardLoader;
 import com.autoatelier.util.SceneManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
 public class ClientMyOrdersController extends BaseController {
 
-    @FXML private VBox ordersListBox;
-    @FXML private VBox detailPane;
-    @FXML private Label detailService;
-    @FXML private Label detailCar;
-    @FXML private Label detailStatus;
-    @FXML private Label detailPrice;
-    @FXML private Label detailComment;
-    @FXML private Label detailDescription;
-    @FXML private Label statusLabel;
+    @FXML private VBox   ordersListBox;
+    @FXML private VBox   detailPane;
+    @FXML private Label  detailService;
+    @FXML private Label  detailCar;
+    @FXML private Label  detailStatus;
+    @FXML private Label  detailPrice;
+    @FXML private Label  detailComment;
+    @FXML private Label  detailDescription;
+    @FXML private Label  statusLabel;
+    @FXML private Button cancelOrderBtn;
+    @FXML private Button repeatOrderBtn;
+
+    private Order selectedOrder;
 
     @Override
     protected void onInit() {
@@ -52,67 +57,14 @@ public class ClientMyOrdersController extends BaseController {
     }
 
     private VBox buildOrderCard(Order order) {
-        VBox card = new VBox(0);
-        card.getStyleClass().add("order-card");
-        card.setOnMouseClicked(e -> showDetail(order));
-        card.setCursor(javafx.scene.Cursor.HAND);
-
-        Order.Status st = order.getStatusEnum();
-
-        HBox row = new HBox(0);
-        row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-
-        Rectangle bar = new Rectangle(4, 72);
-        bar.setStyle("-fx-fill: " + st.color + ";");
-        bar.setArcWidth(4); bar.setArcHeight(4);
-
-        VBox body = new VBox(8);
-        body.getStyleClass().add("order-card-body");
-        HBox.setHgrow(body, Priority.ALWAYS);
-
-        HBox top = new HBox(10);
-        top.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        Label svcName = new Label(order.getService() != null
-                ? order.getService().getName() : "Услуга #" + order.getServiceId());
-        svcName.getStyleClass().add("order-card-service");
-        HBox.setHgrow(svcName, Priority.ALWAYS);
-        svcName.setWrapText(true);
-
-        Label badge = new Label(st.display);
-        badge.getStyleClass().addAll("order-card-status-badge", "badge-" + order.getStatus());
-        top.getChildren().addAll(svcName, badge);
-
-        Label carLbl = new Label("🚗  " + order.getCarInfo());
-        carLbl.getStyleClass().add("order-card-meta");
-
-        HBox bot = new HBox(0);
-        bot.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        Label price = new Label(order.getPriceFormatted());
-        price.getStyleClass().add("order-card-price");
-        HBox.setHgrow(price, Priority.ALWAYS);
-        String dateStr = order.getCreatedAt() != null
-                ? order.getCreatedAt().substring(0, 10) : "";
-        Label date = new Label(dateStr);
-        date.getStyleClass().add("order-card-date");
-        bot.getChildren().addAll(price, date);
-
-        body.getChildren().addAll(top, carLbl, bot);
-
-        if (order.getManagerComment() != null && !order.getManagerComment().isBlank()) {
-            Label cmt = new Label("💬  " + order.getManagerComment());
-            cmt.getStyleClass().add("order-card-comment");
-            cmt.setWrapText(true);
-            body.getChildren().add(cmt);
-        }
-
-        row.getChildren().addAll(bar, body);
-        card.getChildren().add(row);
-        return card;
+        return OrderCardLoader.create(order, () -> showDetail(order));
     }
 
     private void showDetail(Order order) {
+        selectedOrder = order;
         detailPane.setVisible(true);
         detailPane.setManaged(true);
+
         detailService.setText(order.getService() != null ? order.getService().getName() : "—");
         detailCar.setText(order.getCarInfo());
         detailStatus.setText(order.getStatusDisplay());
@@ -121,11 +73,60 @@ public class ClientMyOrdersController extends BaseController {
         detailDescription.setText(order.getDescription() != null ? order.getDescription() : "—");
         detailComment.setText(order.getManagerComment() != null
                 ? order.getManagerComment() : "Комментарий не добавлен");
+
+        boolean isNew = Order.Status.NEW.key.equals(order.getStatus());
+        cancelOrderBtn.setVisible(isNew);
+        cancelOrderBtn.setManaged(isNew);
+
+        boolean isDone = Order.Status.COMPLETED.key.equals(order.getStatus());
+        repeatOrderBtn.setVisible(isDone);
+        repeatOrderBtn.setManaged(isDone);
     }
 
-    @FXML private void refresh() { loadOrders(); }
-    @FXML private void goToProfile()  { SceneManager.navigate("client-profile"); }
-    @FXML private void goToDashboard()  { SceneManager.navigate("client-dashboard"); }
-    @FXML private void goToCatalog()    { SceneManager.navigate("client-catalog"); }
-    @FXML private void goToNewOrder()   { SceneManager.navigate("client-new-order"); }
+    @FXML
+    private void handleCancelOrder() {
+        if (selectedOrder == null) return;
+        if (!AlertUtil.confirm("Отмена заявки",
+                "Вы уверены, что хотите отменить заявку «"
+                + (selectedOrder.getService() != null ? selectedOrder.getService().getName() : "#" + selectedOrder.getId())
+                + "»?")) return;
+
+        cancelOrderBtn.setDisable(true);
+        new Thread(() -> {
+            try {
+                OrderService.getInstance().cancelOrder(selectedOrder.getId());
+                Platform.runLater(() -> {
+                    detailPane.setVisible(false);
+                    detailPane.setManaged(false);
+                    selectedOrder = null;
+                    loadOrders();
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    cancelOrderBtn.setDisable(false);
+                    AlertUtil.error("Ошибка", e.getMessage());
+                });
+            }
+        }).start();
+    }
+
+    @FXML
+    private void handleRepeatOrder() {
+        if (selectedOrder == null) return;
+        if (selectedOrder.getServiceId() != null)
+            System.setProperty("selected.service.id", String.valueOf(selectedOrder.getServiceId()));
+        if (selectedOrder.getCarModel() != null)
+            System.setProperty("repeat.car.model", selectedOrder.getCarModel());
+        if (selectedOrder.getCarYear() != null)
+            System.setProperty("repeat.car.year", String.valueOf(selectedOrder.getCarYear()));
+        SceneManager.navigate("client-new-order");
+    }
+
+    @FXML private void refresh()         { loadOrders(); }
+    @FXML private void goToProfile()     { SceneManager.navigate("client-profile"); }
+    @FXML private void goToDashboard()   { SceneManager.navigate("client-dashboard"); }
+    @FXML private void goToCatalog()     { SceneManager.navigate("client-catalog"); }
+    @FXML private void goToNewOrder()    { SceneManager.navigate("client-new-order"); }
+    @FXML private void goToOrders()      {  }
+    @FXML private void goToPayHistory()  { SceneManager.navigate("client-pay-history"); }
 }

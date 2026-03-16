@@ -251,6 +251,7 @@ public class ManagerCatalogController extends BaseController {
     }
 
     @FXML private void goToDashboard()  { SceneManager.navigate("manager-dashboard"); }
+    @FXML private void goToCatalog()    {  }
     @FXML private void goToProfile()    { SceneManager.navigate("manager-profile"); }
     @FXML private void goToOrders()     { SceneManager.navigate("manager-orders"); }
 }

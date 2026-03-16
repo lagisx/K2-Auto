@@ -71,6 +71,11 @@ public class ClientNewOrderController extends BaseController {
 
         loadServices();
         loadCards();
+
+        String repeatModel = System.getProperty("repeat.car.model");
+        String repeatYear  = System.getProperty("repeat.car.year");
+        if (repeatModel != null) { carModelField.setText(repeatModel); System.clearProperty("repeat.car.model"); }
+        if (repeatYear  != null) { carYearField.setText(repeatYear);   System.clearProperty("repeat.car.year"); }
     }
 
     private void loadServices() {
@@ -170,5 +175,7 @@ public class ClientNewOrderController extends BaseController {
     @FXML private void goToProfile()   { SceneManager.navigate("client-profile"); }
     @FXML private void goToDashboard() { SceneManager.navigate("client-dashboard"); }
     @FXML private void goToCatalog()   { SceneManager.navigate("client-catalog"); }
+    @FXML private void goToNewOrder()  {  }
     @FXML private void goToOrders()    { SceneManager.navigate("client-orders"); }
+    @FXML private void goToPayHistory() { SceneManager.navigate("client-pay-history"); }
 }

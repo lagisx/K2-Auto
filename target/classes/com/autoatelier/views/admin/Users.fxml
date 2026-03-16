@@ -16,10 +16,10 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"        styleClass="nav-tab"                onAction="#goToDashboard"/>
-        <Button text="Пользователи" styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+        <Button text="Пользователи" styleClass="nav-tab nav-tab-active" onAction="#goToUsers"/>
         <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
         <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
         <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 

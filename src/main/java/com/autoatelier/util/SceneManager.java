@@ -23,22 +23,24 @@ public class SceneManager {
         ROUTES.put("comp-topbar",           "/com/autoatelier/views/components/TopBar.fxml");
         ROUTES.put("comp-payment-card",    "/com/autoatelier/views/components/PaymentCardView.fxml");
 
-        ROUTES.put("client-dashboard", "/com/autoatelier/views/client/Dashboard.fxml");
+        ROUTES.put("client-dashboard", "/com/autoatelier/views/client/Catalog.fxml");
         ROUTES.put("client-catalog",   "/com/autoatelier/views/client/Catalog.fxml");
         ROUTES.put("client-orders",    "/com/autoatelier/views/client/MyOrders.fxml");
         ROUTES.put("client-new-order", "/com/autoatelier/views/client/NewOrder.fxml");
         ROUTES.put("client-profile",   "/com/autoatelier/views/client/Profile.fxml");
 
-        ROUTES.put("manager-dashboard","/com/autoatelier/views/manager/Dashboard.fxml");
+        ROUTES.put("manager-dashboard","/com/autoatelier/views/manager/Orders.fxml");
         ROUTES.put("manager-orders",   "/com/autoatelier/views/manager/Orders.fxml");
         ROUTES.put("manager-catalog",  "/com/autoatelier/views/manager/Catalog.fxml");
         ROUTES.put("manager-profile",  "/com/autoatelier/views/manager/Profile.fxml");
 
-        ROUTES.put("admin-dashboard",  "/com/autoatelier/views/admin/Dashboard.fxml");
+        ROUTES.put("admin-dashboard",  "/com/autoatelier/views/admin/Users.fxml");
         ROUTES.put("admin-users",      "/com/autoatelier/views/admin/Users.fxml");
         ROUTES.put("admin-services",   "/com/autoatelier/views/admin/Services.fxml");
         ROUTES.put("admin-stats",      "/com/autoatelier/views/admin/Statistics.fxml");
         ROUTES.put("admin-profile",    "/com/autoatelier/views/admin/Profile.fxml");
+        ROUTES.put("admin-archive",    "/com/autoatelier/views/admin/Archive.fxml");
+        ROUTES.put("client-pay-history", "/com/autoatelier/views/client/PaymentHistory.fxml");
     }
 
     public static void init(Stage stage) {

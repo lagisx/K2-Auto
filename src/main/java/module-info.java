@@ -12,15 +12,15 @@ module com.autoatelier {
     requires org.kordamp.ikonli.fontawesome5;
 
     requires java.net.http;
+    requires java.prefs;
 
-    // Открываем пакеты для JavaFX FXML (рефлексия при загрузке контроллеров)
     opens com.autoatelier to javafx.fxml;
     opens com.autoatelier.controller to javafx.fxml;
+    opens com.autoatelier.controller.components to javafx.fxml;
     opens com.autoatelier.controller.client to javafx.fxml;
     opens com.autoatelier.controller.manager to javafx.fxml;
     opens com.autoatelier.controller.admin to javafx.fxml;
 
-    // Открываем модели для Jackson (рефлексия при десериализации JSON)
     opens com.autoatelier.model to com.fasterxml.jackson.databind;
     opens com.autoatelier.service to com.fasterxml.jackson.databind;
 

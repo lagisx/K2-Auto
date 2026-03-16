@@ -148,5 +148,7 @@ public class AdminServicesController extends BaseController {
     @FXML private void goToDashboard() { SceneManager.navigate("admin-dashboard"); }
     @FXML private void goToUsers()     { SceneManager.navigate("admin-users"); }
     @FXML private void goToStats()     { SceneManager.navigate("admin-stats"); }
+    @FXML private void goToArchive()   { SceneManager.navigate("admin-archive"); }
+    @FXML private void goToServices()  {  }
     @FXML private void goToProfile()   { SceneManager.navigate("admin-profile"); }
 }

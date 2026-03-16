@@ -16,10 +16,10 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"      styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
-        <Button text="Новая заявка" styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+        <Button text="Новая заявка" styleClass="nav-tab nav-tab-active" onAction="#goToNewOrder"/>
         <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат" styleClass="nav-tab"                onAction="#goToPayHistory"/>
         <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
@@ -27,7 +27,6 @@
         <VBox styleClass="page-content" spacing="0">
             <HBox spacing="32" alignment="TOP_LEFT">
 
-                
                 <VBox spacing="24" HBox.hgrow="ALWAYS">
 
                     <VBox spacing="4">
@@ -36,7 +35,6 @@
                                styleClass="page-subtitle"/>
                     </VBox>
 
-                    
                     <VBox styleClass="order-step-card" spacing="14">
                         <HBox spacing="12" alignment="CENTER_LEFT">
                             <Label text="1" styleClass="step-number"/>
@@ -55,7 +53,6 @@
                         </HBox>
                     </VBox>
 
-                    
                     <VBox styleClass="order-step-card" spacing="14">
                         <HBox spacing="12" alignment="CENTER_LEFT">
                             <Label text="2" styleClass="step-number"/>
@@ -82,7 +79,6 @@
                         </VBox>
                     </VBox>
 
-                    
                     <VBox styleClass="order-step-card" spacing="14">
                         <HBox spacing="12" alignment="CENTER_LEFT">
                             <Label text="3" styleClass="step-number"/>
@@ -118,7 +114,6 @@
                     </HBox>
                 </VBox>
 
-                
                 <VBox spacing="16" minWidth="260" maxWidth="300" styleClass="order-hint-panel">
                     <Label text="Как это работает?" styleClass="hint-panel-title"/>
                     <Separator styleClass="detail-sep"/>

@@ -15,16 +15,15 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"      styleClass="nav-tab"                onAction="#goToDashboard"/>
-        <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
-        <Button text="Новая заявка" styleClass="nav-tab"                onAction="#goToNewOrder"/>
-        <Button text="Мои заказы"   styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
-        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+        <Button text="Каталог"         styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка"    styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"      styleClass="nav-tab nav-tab-active" onAction="#goToOrders"/>
+        <Button text="История оплат"   styleClass="nav-tab"                onAction="#goToPayHistory"/>
+        <Button text="Профиль"         styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
     <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
 
-        
         <VBox spacing="14" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Label text="Мои заявки" styleClass="page-title" HBox.hgrow="ALWAYS"/>
@@ -38,8 +37,9 @@
             </ScrollPane>
         </VBox>
 
-        
-        <VBox fx:id="detailPane" spacing="16" styleClass="detail-panel-new" minWidth="320" maxWidth="360">
+        <VBox fx:id="detailPane" spacing="16" styleClass="detail-panel-new"
+              minWidth="320" maxWidth="360"
+              visible="false" managed="false">
             <Label text="Детали заявки" styleClass="detail-panel-title"/>
             <Separator styleClass="detail-sep"/>
 
@@ -70,6 +70,18 @@
                     <Label fx:id="detailComment" styleClass="detail-comment-box" wrapText="true"/>
                 </VBox>
             </VBox>
+
+            <Separator styleClass="detail-sep"/>
+
+            <Button fx:id="cancelOrderBtn" text="✕  Отменить заявку"
+                    styleClass="btn-danger" maxWidth="Infinity"
+                    onAction="#handleCancelOrder"
+                    visible="false" managed="false"/>
+
+            <Button fx:id="repeatOrderBtn" text="↺  Повторить заявку"
+                    styleClass="btn-outline" maxWidth="Infinity"
+                    onAction="#handleRepeatOrder"
+                    visible="false" managed="false"/>
         </VBox>
     </HBox>
 </VBox>

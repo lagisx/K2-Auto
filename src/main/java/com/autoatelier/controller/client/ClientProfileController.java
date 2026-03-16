@@ -191,4 +191,6 @@ public class ClientProfileController extends BaseController {
         label.getStyleClass().removeAll("status-ok", "status-error");
         label.getStyleClass().add(ok ? "status-ok" : "status-error");
     }
+
+    @FXML private void goToPayHistory() { com.autoatelier.util.SceneManager.navigate("client-pay-history"); }
 }

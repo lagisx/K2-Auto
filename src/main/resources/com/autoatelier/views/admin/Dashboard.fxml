@@ -16,10 +16,10 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"        styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
         <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
         <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
         <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
         <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
@@ -68,14 +68,6 @@
                 </VBox>
             </HBox>
 
-            <VBox spacing="12">
-                <Label text="Управление" styleClass="section-title"/>
-                <HBox spacing="12">
-                    <Button text="👥  Пользователи"  styleClass="action-btn action-btn-primary" onAction="#goToUsers"/>
-                    <Button text="🔧  Каталог услуг" styleClass="action-btn action-btn-ghost"   onAction="#goToServices"/>
-                    <Button text="📊  Статистика"    styleClass="action-btn action-btn-ghost"   onAction="#goToStats"/>
-                </HBox>
-            </VBox>
         </VBox>
     </ScrollPane>
 </VBox>

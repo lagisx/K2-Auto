@@ -16,7 +16,6 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"   styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
         <Button text="Заказы"  styleClass="nav-tab"                onAction="#goToOrders"/>
         <Button text="Каталог" styleClass="nav-tab"                onAction="#goToCatalog"/>
         <Button text="Профиль" styleClass="nav-tab"                onAction="#goToProfile"/>
@@ -30,24 +29,50 @@
                 <Label text="Управляйте заказами и каталогом услуг" styleClass="page-subtitle"/>
             </VBox>
 
-            <HBox spacing="16">
-                <VBox styleClass="stat-card-new stat-accent-blue" HBox.hgrow="ALWAYS" spacing="8">
-                    <Label text="📋  Всего заказов" styleClass="stat-card-label"/>
-                    <Label fx:id="totalLabel" text="—" styleClass="stat-card-value"/>
-                </VBox>
-                <VBox styleClass="stat-card-new stat-accent-red" HBox.hgrow="ALWAYS" spacing="8">
-                    <Label text="🆕  Новые" styleClass="stat-card-label"/>
-                    <Label fx:id="newLabel" text="—" styleClass="stat-card-value"/>
-                </VBox>
-                <VBox styleClass="stat-card-new stat-accent-amber" HBox.hgrow="ALWAYS" spacing="8">
-                    <Label text="⚙️  В работе" styleClass="stat-card-label"/>
-                    <Label fx:id="inProgressLabel" text="—" styleClass="stat-card-value"/>
-                </VBox>
-                <VBox styleClass="stat-card-new stat-accent-green" HBox.hgrow="ALWAYS" spacing="8">
-                    <Label text="✅  Завершено" styleClass="stat-card-label"/>
-                    <Label fx:id="completedLabel" text="—" styleClass="stat-card-value"/>
-                </VBox>
-            </HBox>
+            <VBox spacing="10">
+                <Label text="Статистика ателье" styleClass="section-title"/>
+                <HBox spacing="16">
+                    <VBox styleClass="stat-card-new stat-accent-blue" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="📋  Всего заказов" styleClass="stat-card-label"/>
+                        <Label fx:id="totalLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-red" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="🆕  Новые" styleClass="stat-card-label"/>
+                        <Label fx:id="newLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-amber" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="⚙️  В работе" styleClass="stat-card-label"/>
+                        <Label fx:id="inProgressLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-green" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="✅  Завершено" styleClass="stat-card-label"/>
+                        <Label fx:id="completedLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10">
+                <Label text="Моя статистика" styleClass="section-title"/>
+                <HBox spacing="16">
+                    <VBox styleClass="stat-card-new stat-accent-purple" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="📁  Обработал заявок" styleClass="stat-card-label"/>
+                        <Label fx:id="myTotalLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-amber" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="⚙️  В работе у меня" styleClass="stat-card-label"/>
+                        <Label fx:id="myInProgressLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-green" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="✅  Завершил" styleClass="stat-card-label"/>
+                        <Label fx:id="myCompletedLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-gold" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="💰  Выручка по мне" styleClass="stat-card-label"/>
+                        <Label fx:id="myRevenueLabel" text="—" styleClass="stat-card-value"
+                               style="-fx-font-size: 20px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
 
             <HBox spacing="12">
                 <Button text="📋  Перейти к заказам"   styleClass="action-btn action-btn-primary" onAction="#goToOrders"/>

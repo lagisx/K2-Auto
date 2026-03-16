@@ -16,7 +16,6 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"   styleClass="nav-tab"                onAction="#goToDashboard"/>
         <Button text="Заказы"  styleClass="nav-tab"                onAction="#goToOrders"/>
         <Button text="Каталог" styleClass="nav-tab"                onAction="#goToCatalog"/>
         <Button text="Профиль" styleClass="nav-tab nav-tab-active" onAction="#goToProfile"/>
@@ -30,7 +29,6 @@
                 <Label fx:id="emailLabel" styleClass="profile-email"/>
             </VBox>
 
-            
             <VBox styleClass="profile-section" spacing="16">
                 <Label text="Личные данные" styleClass="profile-section-title"/>
                 <Separator styleClass="detail-sep"/>
@@ -50,7 +48,6 @@
                 </HBox>
             </VBox>
 
-            
             <VBox styleClass="profile-section" spacing="16">
                 <Label text="Безопасность" styleClass="profile-section-title"/>
                 <Separator styleClass="detail-sep"/>

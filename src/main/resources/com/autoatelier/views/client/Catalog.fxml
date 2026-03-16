@@ -15,11 +15,11 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Главная"    styleClass="nav-tab"                onAction="#goToDashboard"/>
-        <Button text="Каталог"    styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
-        <Button text="Новая заявка" styleClass="nav-tab"              onAction="#goToNewOrder"/>
-        <Button text="Мои заказы" styleClass="nav-tab"                onAction="#goToOrders"/>
-        <Button text="Профиль"    styleClass="nav-tab"                onAction="#goToProfile"/>
+        <Button text="Каталог"       styleClass="nav-tab nav-tab-active" onAction="#goToCatalog"/>
+        <Button text="Новая заявка"  styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"    styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат" styleClass="nav-tab"                onAction="#goToPayHistory"/>
+        <Button text="Профиль"       styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
 
     <VBox styleClass="page-content" spacing="20" VBox.vgrow="ALWAYS">

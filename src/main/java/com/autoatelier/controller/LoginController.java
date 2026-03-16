@@ -70,6 +70,7 @@ public class LoginController {
     private void showError(String msg) {
         errorLabel.setText(msg);
         errorLabel.setVisible(true);
+        errorLabel.setManaged(true);
     }
 
     private void setLoading(boolean loading) {

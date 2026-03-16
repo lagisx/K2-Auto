@@ -16,8 +16,7 @@
     </HBox>
 
     <HBox styleClass="topbar-nav" spacing="0">
-        <Button text="Обзор"   styleClass="nav-tab"                onAction="#goToDashboard"/>
-        <Button text="Заказы"  styleClass="nav-tab nav-tab-active" onAction="#goToDashboard"/>
+        <Button text="Заказы"  styleClass="nav-tab nav-tab-active" onAction="#goToOrders"/>
         <Button text="Каталог" styleClass="nav-tab"                onAction="#goToCatalog"/>
         <Button text="Профиль" styleClass="nav-tab"                onAction="#goToProfile"/>
     </HBox>
@@ -27,9 +26,19 @@
         <VBox spacing="14" HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Label text="Заказы клиентов" styleClass="page-title" HBox.hgrow="ALWAYS"/>
-                <ComboBox fx:id="filterCombo" prefWidth="160" styleClass="filter-combo"/>
+                <ComboBox fx:id="filterCombo" prefWidth="140" styleClass="filter-combo"/>
                 <Button text="Обновить" styleClass="btn-outline" onAction="#refresh"/>
             </HBox>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Поиск клиента:" styleClass="form-label-new"/>
+                <TextField fx:id="clientSearchField" promptText="Имя или телефон..."
+                           styleClass="input-field" prefWidth="260"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Найти" styleClass="btn-primary-sm" onAction="#handleClientSearch"/>
+                <Button text="Сбросить" styleClass="btn-outline" onAction="#handleSearchReset"/>
+            </HBox>
+
             <Label fx:id="statusLabel" styleClass="page-subtitle"/>
 
             <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
