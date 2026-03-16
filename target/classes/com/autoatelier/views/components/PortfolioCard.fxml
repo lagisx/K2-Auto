@@ -9,7 +9,6 @@
       spacing="0"
       prefWidth="280">
 
-    
     <StackPane styleClass="portfolio-card-image-wrap" prefHeight="180">
         <ImageView fx:id="cardThumb" fitWidth="280" fitHeight="180"
                    preserveRatio="false" styleClass="portfolio-card-img"/>
@@ -18,7 +17,7 @@
             <Label text="📷" styleClass="placeholder-icon"/>
             <Label text="Нет фото" styleClass="placeholder-text"/>
         </VBox>
-        
+
         <Label fx:id="cardPhotoCount" styleClass="portfolio-photo-count"
                StackPane.alignment="BOTTOM_RIGHT"/>
     </StackPane>
